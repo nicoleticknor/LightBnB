@@ -1,14 +1,4 @@
-const properties = require('./json/properties.json');
-const users = require('./json/users.json');
-
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS
-});
+const { query } = require('../database/index')
 
 /// Users
 
@@ -18,7 +8,7 @@ const pool = new Pool({
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithEmail = function (email) {
-  return pool.query(`
+  return query(`
   SELECT * FROM users
   WHERE email = $1
   `, [email])
@@ -32,7 +22,7 @@ exports.getUserWithEmail = getUserWithEmail;
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function (id) {
-  return pool.query(`
+  return query(`
   SELECT * FROM users
   WHERE id = $1
   `, [id])
@@ -47,7 +37,7 @@ exports.getUserWithId = getUserWithId;
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser = function (user) {
-  return pool.query(`
+  return query(`
   INSERT INTO users (name, email, password) 
   VALUES ($1, $2, $3)
   RETURNING *;`, [user.name, user.email, user.password])
@@ -66,7 +56,7 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function (guest_id, limit = 10) {
-  return pool.query(`
+  return query(`
     SELECT properties.*, reservations.*, AVG(rating) AS average_rating
     FROM properties
     JOIN reservations ON properties.id = property_id
@@ -150,7 +140,7 @@ const getAllProperties = function (options, limit = 10) {
  LIMIT $${queryParams.length};
  `;
 
-  return pool.query(queryString, queryParams)
+  return query(queryString, queryParams)
     .then(res => {
       return res.rows
     });
@@ -165,7 +155,7 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function (property) {
-  return pool.query(`
+  return query(`
   INSERT INTO properties (
     owner_id,
     title,
