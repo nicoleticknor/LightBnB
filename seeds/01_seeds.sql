@@ -40,8 +40,7 @@ INSERT INTO properties (
   post_code,
   active
 ) VALUES 
-(
-  1,
+  1001,
   'The Jewel of Blaine, MO',
   'Just blocks from off-off-off-off-Broadway',
   'https://api.creativecommons.engineering/t/600/https://farm5.staticflickr.com/4560/24445386508_cd6406b9db_m.jpg',
@@ -56,9 +55,9 @@ INSERT INTO properties (
   'Missouri',
   '10782',
   TRUE
-);
+)
 (
-  2,
+  1002,
   'A Giant House',
   'A bit small for me, but perhaps you will like it',
   'https://api.creativecommons.engineering/t/600/https://farm6.staticflickr.com/5632/20358371509_3a22ae4a9c_m.jpg',
@@ -74,7 +73,7 @@ INSERT INTO properties (
   '10783',
   TRUE
 ),(
-  3,
+  1003,
   'Home Sweet Home',
   'A cosy home away from home for you and your family.',
   'https://api.creativecommons.engineering/t/600/https://live.staticflickr.com/4632/39756741524_5501546f37_m.jpg',
@@ -99,18 +98,18 @@ INSERT INTO reservations (
 ) VALUES (
   '2018-09-11',
   '2018-09-26',
-  2,
-  1
+  1002,
+  1001
 ),(
   '2019-09-10',
   '2019-09-27',
-  2,
-  1
+  1002,
+  1001
 ),(
   '2019-08-01',
   '2019-09-05',
-  2,
-  3
+  1002,
+  1003
 );
 
 INSERT INTO property_reviews (
@@ -120,21 +119,22 @@ INSERT INTO property_reviews (
   rating,
   message
 ) VALUES (
-  1,
-  2,
+  1001,
+  1002,
   1,
   5,
   'Amazing! Stunning! There was even a Remains of the Day lunchbox to carry my picnics!'
 ),(
-  1,
+  1001,
+  1002,
   2,
-  1,
   1,
   'The ROTD lunchbox was gone!! So disappointed. Im going home and I''m gonna... I''m gonna bite my pillow is what I''m gonna do!'
 ),(
+  1003,
+  1002,
   3,
-  2,
-  1,
   5,
   'Extremely accessible floorplan; just great for my two left feet.'
 );
+
